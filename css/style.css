@@ -19,8 +19,12 @@ a:hover {
 }
 
 .cat-list {
-    list-style: none;
+    list-style-type: none;
     text-indent: -1.0em;
+}
+
+.cat-list li {
+    margin: 1.5em 0;
 }
 
 .game-container {

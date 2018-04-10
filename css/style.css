@@ -1,0 +1,21 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.cat {
+    margin-top: 1.0em;
+    width: 70%;
+}
+
+.clics {
+    display: flex;
+    align-items: baseline;
+}
+
+.counter {
+    font-size: 1.5em;
+    margin: 0.5em;
+}

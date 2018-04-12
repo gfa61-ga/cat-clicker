@@ -1,80 +1,114 @@
 (function() {
 
-    let Cat = function(name, imgUrl) {
-        this.name = name;
-        this.imgUrl = imgUrl;
-        this.html = `
-            <div class="cat-container">
-                <div class="cat-name">
-                    ${this.name}
+    let model = {
+        cats: [{
+                name: 'Pixie',
+                imgUrl: 'img/cat1.jpg',
+                clicks: 0
+            }, {
+                name: 'Venus',
+                imgUrl: 'img/cat2.jpg',
+                clicks: 0
+            }, {
+                name: 'Banjo & Mars',
+                imgUrl: 'img/cat3.jpg',
+                clicks: 0
+            }, {
+                name: 'Ruby',
+                imgUrl: 'img/cat4.jpg',
+                clicks: 0
+            }, {
+                name: 'Taffy',
+                imgUrl: 'img/cat5.jpg',
+                clicks: 0
+            }
+        ],
+
+        currentCat: {}
+    };
+
+    let octapus = {
+        init: function() {
+            viewCatList.init();
+
+            let cats = octapus.getCats();
+            octapus.setCurrentCat(cats[0]);
+            viewSelectedCat.init();
+        },
+
+        getCats: function() {
+            return model.cats;
+        },
+
+        setCurrentCat: function(selectedCat) {
+            model.currentCat = selectedCat;
+        },
+
+        getCurrentCat: function() {
+            return model.currentCat;
+        }
+    };
+
+    let viewCatList = {
+        init: function() {
+            let catList = document.querySelector('.cat-list');
+
+            octapus.getCats().forEach(function(cat) {
+                let listItem = document.createElement('li');
+                listItem.innerHTML = `
+                    <li>
+                        <a href="#">${cat.name}</a>
+                    </li>
+                `;
+                catList.appendChild(listItem);
+
+                listItem.addEventListener('click', function(e) {
+                        octapus.setCurrentCat(cat);
+
+                        viewSelectedCat.render();
+                    },
+                    false
+                );
+            });
+        }
+    };
+
+    let viewSelectedCat = {
+        init: function() {
+            viewSelectedCat.render();
+        },
+
+        render: function() {
+            let gameContainer = document.querySelector('.game-container');
+            let selectedCat = octapus.getCurrentCat();
+
+            gameContainer.innerHTML = `
+                <div class="cat-container">
+                    <div class="cat-name">
+                        ${selectedCat.name}
+                    </div>
+
+                    <img class="cat-img" src=${selectedCat.imgUrl}>
+                    <div class="clics-container">
+                        Number of clicks: <span class="clicks-span">${selectedCat.clicks}</span>
+                    </div>
                 </div>
+            `;
 
-                <img class="cat-img" src=${this.imgUrl}>
-                <div class="clics-container">
-                    Number of clicks: <span class="clicks-span">0</span>
-                </div>
-            </div>
-        `;
-        this.addtoGame();
-        this.hide();
+            let catContainer = document.querySelector('.cat-container');
+
+            catContainer.addEventListener('click',
+                function() {
+                    let clicksSpan = catContainer.querySelector('.clicks-span');
+                    clicksSpan.innerText = ++selectedCat.clicks;
+
+                    octapus.setCurrentCat(selectedCat);
+                },
+                false
+            );
+        }
     };
 
-    let gameContainer = document.querySelector('.game-container');
-    let catList = document.querySelector('.cat-list');
+    octapus.init();
 
-    Cat.prototype.addtoGame = function() {
-        this.catContainer = document.createElement('div');
-        this.catContainer.innerHTML = this.html;
-        gameContainer.appendChild(this.catContainer);
-
-        this.listItem = document.createElement('li');
-        this.listItem.innerHTML = `
-            <li>
-                <a href="#">${this.name}</a>
-            </li>
-        `;
-        catList.appendChild(this.listItem);
-
-        this.listItem.addEventListener('click', function(e) {
-                    currentCat.hide();
-                    let selectedCatName = e.target.innerText;
-                    currentCat = cats.find(cat => cat.name === selectedCatName);
-
-                    currentCat.show();
-            },
-            false
-        );
-
-        this.catContainer.addEventListener('click',
-            (function() {
-                let clicks = 0;
-                return function(e) {
-                    let clicksSpan = currentCat.catContainer.querySelector('.clicks-span');
-
-                    clicks++;
-                    clicksSpan.innerText = clicks;
-                };
-            })(),
-            false
-        );
-    };
-
-    Cat.prototype.hide = function() {
-        this.catContainer.style.display = "none";
-    };
-
-    Cat.prototype.show = function() {
-        this.catContainer.style.display = "block";
-    };
-
-    let cats = [];
-
-    cats.push(new Cat("Pixie", "img/cat1.jpg"));
-    cats.push(new Cat("Venus", "img/cat2.jpg"));
-    cats.push(new Cat("Banjo & Mars", "img/cat3.jpg"));
-    cats.push(new Cat("Ruby", "img/cat4.jpg"));
-    cats.push(new Cat("Taffy", "img/cat5.jpg"));
-
-    let currentCat = cats[0];
-    cats[0].show();
 })();

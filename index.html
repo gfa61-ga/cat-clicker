@@ -8,13 +8,38 @@
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-        <div class="cat-selection-bar">
-            <ul class="cat-list">
-            </ul>
+        <div class="user-div">
+            <div class="cat-selection-bar">
+                <ul class="cat-list">
+                </ul>
+            </div>
+            <div class="game-container">
+                  <div class="cat-container">
+                  </div>
+            </div>
         </div>
-        <div class="game-container">
-              <div class="cat-container">
-              </div>
+        <div class="admin-div">
+            <div class="admin-button-div">
+                <button class="admin-button">Admin</button>
+            </div>
+            <form class="admin-form">
+                <div>
+                    <label for="name-input">Cat name:</label>
+                    <input type="text" id="name-input">
+                </div>
+                <div>
+                    <label for="img-url-input">Image Url:</label>
+                    <input type="url" id="img-url-input">
+                </div>
+                <div>
+                    <label for="clicks-input">Clicks:</label>
+                    <input type="text" id="clicks-input">
+                </div>
+                <div>
+                    <input type="button" class="cancel-button" value="Cancel">
+                    <input type="button" class="save-button" value="Save">
+                </div>
+            </form>
         </div>
     <script src="js/app.js"></script>
     </body>

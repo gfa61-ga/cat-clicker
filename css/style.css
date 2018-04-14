@@ -1,4 +1,4 @@
-body {
+.user-div, .admin-div {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -57,4 +57,35 @@ a:hover {
     font-size: 1.5em;
     margin: 0.5em;
     color:  #3f829d;
+}
+
+.admin-button-div {
+    min-width: 20%;
+    text-align: center;
+}
+
+.admin-button {
+    position: relative;
+    top: -4.5em;
+}
+
+.admin-form {
+    max-width: 80%;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #808080;
+    visibility: hidden;
+}
+
+.admin-form * {
+    margin: 0.2em;
+}
+
+.admin-form div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.admin-form div input {
+    max-width: 55%;
 }

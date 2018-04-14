@@ -66,7 +66,7 @@ a:hover {
 
 .admin-button {
     position: relative;
-    top: -4.5em;
+    top: -4.2em;
 }
 
 .admin-form {
@@ -88,4 +88,8 @@ a:hover {
 
 .admin-form div input {
     max-width: 55%;
+}
+
+input, button {
+        font-size: 0.9em;
 }
